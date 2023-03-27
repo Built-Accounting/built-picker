@@ -153,7 +153,7 @@ export const Picker = <T,>({
 
                   addBButtonOnPress && {
                     flexDirection: 'row',
-                    aliggnItems: 'center',
+                    alignItems: 'center',
                     justifyContent: 'space-between',
                   },
                 ]}
