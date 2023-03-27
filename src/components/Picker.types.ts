@@ -22,6 +22,9 @@ export type PickerProps<T> = {
   searchInputProps?: TextInputProps;
   flatListProps?: FlatListProps<T>;
   actionsSheetProps?: ActionSheetProps;
+  addButton?: React.ReactElement;
+  addBButtonOnPress?: () => void;
+  addBButtonTitle?: string;
 } & (T extends { name: string }
   ? Partial<RenderItemProp<T>>
   : RenderItemProp<T>);

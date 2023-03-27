@@ -39,6 +39,9 @@ export const Picker = <T,>({
   flatListProps,
   actionsSheetProps,
   renderListItem,
+  addButton,
+  addBButtonOnPress,
+  addBButtonTitle,
 }: PickerProps<T>) => {
   const [selectedKey, setSelectedKey] = useState(null);
 
@@ -136,21 +139,54 @@ export const Picker = <T,>({
                       onClose();
                     }}
                   >
-                    <Text style={{color: '#333'}}>{closeText}</Text>
+                    <Text style={{ color: '#333' }}>{closeText}</Text>
                   </TouchableOpacity>
                 </View>
               ) : null}
 
-              <View style={{ marginTop: 10, paddingBottom: 5 }}>
-                <Text
-                  style={{
-                    color: '#333',
-                    fontSize: 16,
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {label}
-                </Text>
+              <View
+                style={[
+                  {
+                    marginTop: 10,
+                    paddingBottom: 5,
+                  },
+
+                  addBButtonOnPress && {
+                    flexDirection: 'row',
+                    aliggnItems: 'center',
+                    justifyContent: 'space-between',
+                  },
+                ]}
+              >
+                <View>
+                  <Text
+                    style={{
+                      color: '#333',
+                      fontSize: 16,
+                      fontWeight: 'bold',
+                    }}
+                  >
+                    {label}
+                  </Text>
+                </View>
+
+                {addBButtonOnPress ? (
+                  addButton ? (
+                    addButton
+                  ) : (
+                    <TouchableOpacity onPress={addBButtonOnPress}>
+                      <Text
+                        style={{
+                          color: '#333',
+                          fontSize: 16,
+                          fontWeight: 'bold',
+                        }}
+                      >
+                        {addBButtonTitle}{' '}
+                      </Text>
+                    </TouchableOpacity>
+                  )
+                ) : null}
               </View>
 
               {loading ? (
@@ -171,7 +207,7 @@ export const Picker = <T,>({
                     paddingTop: 20,
                   }}
                 >
-                  <Text style={{color: '#333'}}>{noDataFoundText}</Text>
+                  <Text style={{ color: '#333' }}>{noDataFoundText}</Text>
                 </View>
               );
             }
