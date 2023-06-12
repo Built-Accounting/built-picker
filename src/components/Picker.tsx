@@ -1,4 +1,4 @@
-import React, { useRef, createRef, useState } from 'react';
+import React, { useRef, createRef, useState } from "react";
 import {
   View,
   TouchableOpacity,
@@ -7,11 +7,11 @@ import {
   Text,
   Dimensions,
   SafeAreaView,
-} from 'react-native';
-import ActionSheet, { SheetManager } from 'react-native-actions-sheet';
-import { FlatList } from 'react-native-gesture-handler';
+} from "react-native";
+import ActionSheet, { SheetManager } from "react-native-actions-sheet";
+import { FlatList } from "react-native-gesture-handler";
 
-import type { PickerProps } from './Picker.types';
+import type { PickerProps } from "./Picker.types";
 
 export const onOpen = (id: any) => {
   SheetManager.show(id);
@@ -28,11 +28,11 @@ export const Picker = <T,>({
   searchable = false,
   loading = false,
   label,
-  height = Math.floor(Dimensions.get('window').height * 0.5),
-  closeText = 'Close',
-  placeholderText = 'Search',
-  noDataFoundText = 'No Data Found.',
-  placeholderTextColor = '#8B93A5',
+  height = Math.floor(Dimensions.get("window").height * 0.5),
+  closeText = "Close",
+  placeholderText = "Search",
+  noDataFoundText = "No Data Found.",
+  placeholderTextColor = "#8B93A5",
   setSelected,
   onSearch,
   searchInputProps,
@@ -42,6 +42,7 @@ export const Picker = <T,>({
   addButton,
   addBButtonOnPress,
   addBButtonTitle,
+  onDismiss,
 }: PickerProps<T>) => {
   const [selectedKey, setSelectedKey] = useState(null);
 
@@ -58,14 +59,14 @@ export const Picker = <T,>({
       style={{
         paddingVertical: 20,
         borderBottomWidth: 0.5,
-        borderColor: '#CDD4D9',
+        borderColor: "#CDD4D9",
       }}
       onPress={() => {
         itemOnPress(item);
         setSelectedKey(index);
       }}
     >
-      <Text style={{ fontWeight: selectedKey !== index ? 'normal' : 'bold' }}>
+      <Text style={{ fontWeight: selectedKey !== index ? "normal" : "bold" }}>
         {item.name ? item.name : null}
       </Text>
     </TouchableOpacity>
@@ -82,9 +83,14 @@ export const Picker = <T,>({
     <ActionSheet
       id={id}
       ref={actionSheetRef}
-      indicatorColor={'transparent'}
+      indicatorColor={"transparent"}
       gestureEnabled={true}
       keyboardShouldPersistTaps="always"
+      onClose={() => {
+        if (onDismiss) {
+          onDismiss();
+        }
+      }}
       {...actionsSheetProps}
     >
       <SafeAreaView
@@ -99,28 +105,28 @@ export const Picker = <T,>({
           ListHeaderComponent={
             <View
               style={{
-                backgroundColor: '#ffffff',
+                backgroundColor: "#ffffff",
               }}
             >
               {searchable ? (
                 <View
                   style={{
-                    flexDirection: 'row',
-                    width: '100%',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
+                    flexDirection: "row",
+                    width: "100%",
+                    alignItems: "center",
+                    justifyContent: "space-between",
                     marginBottom: 10,
                   }}
                 >
-                  <View style={{ flexBasis: '75%' }}>
+                  <View style={{ flexBasis: "75%" }}>
                     <TextInput
                       style={{
                         height: 40,
                         borderWidth: 1,
-                        borderColor: '#CDD4D9',
+                        borderColor: "#CDD4D9",
                         borderRadius: 6,
                         padding: 10,
-                        color: '#333',
+                        color: "#333",
                       }}
                       value={inputValue}
                       placeholderTextColor={placeholderTextColor}
@@ -139,7 +145,7 @@ export const Picker = <T,>({
                       onClose();
                     }}
                   >
-                    <Text style={{ color: '#333' }}>{closeText}</Text>
+                    <Text style={{ color: "#333" }}>{closeText}</Text>
                   </TouchableOpacity>
                 </View>
               ) : null}
@@ -152,18 +158,18 @@ export const Picker = <T,>({
                   },
 
                   addBButtonOnPress && {
-                    flexDirection: 'row',
-                    alignItems: 'center',
-                    justifyContent: 'space-between',
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
                   },
                 ]}
               >
                 <View>
                   <Text
                     style={{
-                      color: '#333',
+                      color: "#333",
                       fontSize: 16,
-                      fontWeight: 'bold',
+                      fontWeight: "bold",
                     }}
                   >
                     {label}
@@ -177,12 +183,12 @@ export const Picker = <T,>({
                     <TouchableOpacity onPress={addBButtonOnPress}>
                       <Text
                         style={{
-                          color: '#333',
+                          color: "#333",
                           fontSize: 16,
-                          fontWeight: 'bold',
+                          fontWeight: "bold",
                         }}
                       >
-                        {addBButtonTitle}{' '}
+                        {addBButtonTitle}{" "}
                       </Text>
                     </TouchableOpacity>
                   )
@@ -203,11 +209,11 @@ export const Picker = <T,>({
                 <View
                   style={{
                     flex: 1,
-                    alignItems: 'center',
+                    alignItems: "center",
                     paddingTop: 20,
                   }}
                 >
-                  <Text style={{ color: '#333' }}>{noDataFoundText}</Text>
+                  <Text style={{ color: "#333" }}>{noDataFoundText}</Text>
                 </View>
               );
             }

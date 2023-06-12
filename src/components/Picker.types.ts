@@ -1,5 +1,5 @@
-import type { FlatListProps, TextInputProps } from 'react-native';
-import type { ActionSheetProps } from 'react-native-actions-sheet';
+import type { FlatListProps, TextInputProps } from "react-native";
+import type { ActionSheetProps } from "react-native-actions-sheet";
 
 type RenderItemProp<T> = {
   renderListItem: (item: T, index: number) => React.ReactElement;
@@ -25,6 +25,7 @@ export type PickerProps<T> = {
   addButton?: React.ReactElement;
   addBButtonOnPress?: () => void;
   addBButtonTitle?: string;
+  onDismiss?: () => void;
 } & (T extends { name: string }
   ? Partial<RenderItemProp<T>>
   : RenderItemProp<T>);
