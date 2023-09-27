@@ -1,5 +1,7 @@
 # React Native Actions Sheet Picker
 
+## The bottom sheet picker used in the built app
+
 A React Native component that provides a filterable select dropdown/picker.
 
 ## Preview
